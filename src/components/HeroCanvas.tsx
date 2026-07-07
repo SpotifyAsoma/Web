@@ -20,7 +20,7 @@ function Coin({ product, index, total, mouse }: CoinProps) {
   const baseZ = Math.cos(angle) * radius;
   const floatOffset = index * 0.5;
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     if (!groupRef.current) return;
     const time = state.clock.getElapsedTime();
     
@@ -33,7 +33,7 @@ function Coin({ product, index, total, mouse }: CoinProps) {
       0.05
     );
     
-    groupRef.current.rotation.y += delta * 0.25;
+    groupRef.current.rotation.y = Math.sin(time * 0.8 + floatOffset) * 0.52;
     groupRef.current.rotation.x = Math.sin(time * 0.5 + floatOffset) * 0.08;
     
     const scale = hovered ? 1.25 : 1;
@@ -88,11 +88,11 @@ function Coin({ product, index, total, mouse }: CoinProps) {
       
       <Html
         transform
-        position={[0, -3.2, 0]}
+        position={[0, -1.6, 0]}
         style={{
           pointerEvents: 'none',
           textAlign: 'center',
-          minWidth: '180px',
+          minWidth: '160px',
         }}
       >
         <div style={{
