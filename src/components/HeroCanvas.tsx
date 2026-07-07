@@ -42,7 +42,7 @@ function Coin({ product, index, total, mouse }: CoinProps) {
 
   const hexColor = product.color.replace('#', '0x');
   
-  const coinGeometry = new THREE.CylinderGeometry(2.2, 2.2, 0.5, 32);
+  const coinGeometry = new THREE.CylinderGeometry(1.2, 1.2, 0.5, 32);
   const edgeGeometry = new THREE.TorusGeometry(2.2, 0.15, 16, 32);
   
   const coinMaterial = new THREE.MeshPhysicalMaterial({
