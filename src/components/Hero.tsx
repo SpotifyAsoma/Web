@@ -4,13 +4,14 @@ import { useContentStore } from '../hooks/useContent';
 export function Hero() {
   const t = useContentStore((s) => s.texts);
   return (
-    <section className="relative lg:h-[700px] overflow-hidden" id="hero">
+    <section className="relative overflow-hidden" id="hero">
       <div className="absolute inset-0 bg-grid" />
       <div className="absolute inset-0 bg-gradient-to-br from-cyber-neon/5 via-transparent to-cyber-neon2/5" />
       <div className="absolute inset-0 bg-gradient-to-t from-cyber-darker via-transparent to-transparent" />
       
-      <div className="relative z-20 px-6 pt-20 pb-16 lg:absolute lg:inset-0 lg:flex lg:items-center lg:justify-center lg:pt-0 lg:pb-0">
-        <div className="max-w-7xl mx-auto w-full">
+      <div className="flex flex-col lg:block lg:relative lg:h-[700px]">
+        <div className="relative z-20 px-6 pt-20 pb-16 lg:absolute lg:inset-0 lg:flex lg:items-center lg:justify-center lg:pt-0 lg:pb-0">
+          <div className="max-w-7xl mx-auto w-full">
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
               style={{
@@ -99,6 +100,7 @@ export function Hero() {
       
       <div className="relative h-[350px] lg:absolute lg:inset-0 lg:h-auto">
         <HeroCanvas />
+      </div>
       </div>
       
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce hidden lg:block">
