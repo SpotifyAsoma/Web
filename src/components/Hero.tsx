@@ -1,6 +1,8 @@
 import { HeroCanvas } from './HeroCanvas';
+import { useContentStore } from '../hooks/useContent';
 
 export function Hero() {
+  const t = useContentStore((s) => s.texts);
   return (
     <section className="relative h-[700px] flex justify-center overflow-hidden" id="hero">
       <div className="absolute inset-0 bg-grid" />
@@ -17,11 +19,11 @@ export function Hero() {
               border: '1px solid #00ff8840',
             }}
           >
-            <span className="font-mono text-xs text-cyber-neon">NEW</span>
+            <span className="font-mono text-xs text-cyber-neon">{t['hero-badge']}</span>
             <span className="font-mono text-xs text-cyber-neon/70">Instant Delivery · 24/7 Support · Best Prices</span>
             <span className="px-2 py-0.5 text-[10px] font-mono font-bold rounded ml-2"
               style={{
-                background: 'linear-gradient(135deg, #ffd700, #ffaa00006e)',
+                background: 'linear-gradient(135deg, #ffd700, #ffaa00)',
                 color: '#0a0a0f',
               }}
             >
@@ -30,11 +32,11 @@ export function Hero() {
           </div>
           
           <h1 className="font-sans font-bold text-5xl md:text-7xl lg:text-8xl leading-[1.05] mb-6 tracking-tight">
-            <span className="text-gradient">GAME VAULT</span>
+            <span className="text-gradient">{t['hero-title']}</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
-            Premium digital currency for your favorite games. Instant delivery, unbeatable prices, trusted by millions of gamers worldwide.
+            {t['hero-description']}
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
@@ -48,7 +50,7 @@ export function Hero() {
               }}
             >
               <span className="relative z-10 flex items-center gap-2">
-                Shop Featured
+                {t['hero-cta-primary']}
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
@@ -62,7 +64,7 @@ export function Hero() {
               className="px-8 py-4 rounded-lg font-sans font-semibold text-base transition-all duration-200 border border-cyber-neon/30 hover:border-cyber-neon hover:bg-cyber-neon/10"
               style={{ color: '#00ff88' }}
             >
-              Browse All Games
+              {t['hero-cta-secondary']}
             </a>
           </div>
           

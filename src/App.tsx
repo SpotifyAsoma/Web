@@ -11,9 +11,12 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { AnimateOnScroll } from './components/AnimateOnScroll';
 import { featuredProducts, products } from './data/products';
 import { useCartStore } from './hooks/useCart';
+import { useContentStore } from './hooks/useContent';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { Blog } from './pages/Blog';
 
 function FeaturedSection() {
+  const t = useContentStore((s) => s.texts);
   return (
     <section id="featured" className="relative py-24 px-6">
       <div className="max-w-7xl mx-auto">
@@ -26,7 +29,7 @@ function FeaturedSection() {
             }}
           >
             <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#00ff88' }} />
-            FEATURED CURRENCIES
+            {t['featured-badge']}
             <span className="px-2 py-0.5 text-[10px] font-mono font-bold rounded ml-2"
               style={{
                 background: 'linear-gradient(135deg, #00ff88, #00d4ff)',
@@ -37,10 +40,10 @@ function FeaturedSection() {
             </span>
           </span>
           <h2 className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-white">
-            Top Game <span className="text-gradient">Currencies</span>
+            <span className="text-gradient">{t['featured-heading']}</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto font-mono">
-            Instant delivery • Best prices • 24/7 support
+            {t['featured-subtext']}
           </p>
         </div>
         
@@ -55,6 +58,7 @@ function FeaturedSection() {
 }
 
 function AllGamesSection() {
+  const t = useContentStore((s) => s.texts);
   return (
     <section id="all" className="relative py-24 px-6 bg-gradient-to-b from-cyber-darker/50 to-transparent">
       <div className="max-w-7xl mx-auto">
@@ -67,7 +71,7 @@ function AllGamesSection() {
                 color: '#ff006e',
               }}
             >
-              ALL GAMES
+              {t['catalog-badge']}
               <span className="px-2 py-0.5 text-[10px] font-mono font-bold rounded ml-2"
                 style={{
                   background: 'linear-gradient(135deg, #ff006e, #ffd700)',
@@ -78,7 +82,7 @@ function AllGamesSection() {
               </span>
             </span>
             <h2 className="font-sans font-bold text-4xl md:text-5xl text-white">
-              Complete <span className="text-gradient">Catalog</span>
+              <span className="text-gradient">{t['catalog-heading']}</span>
             </h2>
           </div>
           <div className="flex items-center gap-2 bg-cyber-card border border-cyber-neon/20 rounded-xl px-4 py-2">
@@ -105,6 +109,7 @@ function AllGamesSection() {
 }
 
 function FeaturesSection() {
+  const t = useContentStore((s) => s.texts);
   const features = [
     { icon: '⚡', title: 'Instant Delivery', desc: 'Get your currency in seconds, not hours. Automated 24/7 delivery system.', color: '#00ff88' },
     { icon: '🔒', title: 'Secure Payments', desc: 'SSL encrypted checkout with multiple payment options including crypto.', color: '#00d4ff' },
@@ -125,13 +130,13 @@ function FeaturesSection() {
               color: '#00d4ff',
             }}
           >
-            WHY CHOOSE AIDEN
+            {t['features-badge']}
           </span>
           <h2 className="font-sans font-bold text-4xl md:text-5xl text-white">
-            Trusted by <span className="text-gradient">Millions</span>
+            <span className="text-gradient">{t['features-heading']}</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto mt-4 font-mono">
-            Join over 2 million gamers who trust GameVault for their digital currency needs
+            {t['features-subtext']}
           </p>
         </div>
         
@@ -166,6 +171,7 @@ function FeaturesSection() {
 
 function CTASection() {
   const { toggleCart } = useCartStore();
+  const t = useContentStore((s) => s.texts);
   
   return (
     <section className="relative py-24 px-6">
@@ -188,13 +194,13 @@ function CTASection() {
               }}
             >
               <span className="w-2 h-2 rounded-full" style={{ background: '#ffd700', animation: 'pulse 1.5s infinite' }} />
-              READY TO LEVEL UP?
+              {t['cta-badge']}
             </span>
             <h2 className="font-sans font-bold text-4xl md:text-5xl lg:text-6xl mb-6 text-white">
-              Start Gaming <span className="text-gradient">Today</span>
+              <span className="text-gradient">{t['cta-heading']}</span>
             </h2>
             <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto font-mono">
-              Join millions of gamers. Instant delivery, best prices, 24/7 support.
+              {t['cta-subtext']}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
@@ -207,7 +213,7 @@ function CTASection() {
                 }}
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  Browse All Games
+                  {t['cta-button']}
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <line x1="5" y1="12" x2="19" y2="12" />
                     <polyline points="12 5 19 12 12 19" />
@@ -224,7 +230,7 @@ function CTASection() {
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <path d="M16 10a4 4 0 0 1 4 4v4" />
                 </svg>
-                View Cart
+                {t['cta-button2']}
               </button>
             </div>
             <div className="mt-6 flex items-center justify-center gap-4 text-xs font-mono text-cyber-neon/70">
@@ -277,6 +283,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<StoreApp />} />
+      <Route path="/blog" element={<Blog />} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

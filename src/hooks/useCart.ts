@@ -49,7 +49,6 @@ export const useCartStore = create<CartState>()(
               icon: product.icon,
               color: product.color,
             }],
-            isOpen: true,
           });
         }
       },

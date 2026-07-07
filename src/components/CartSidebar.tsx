@@ -3,17 +3,16 @@ import { useCartStore } from '../hooks/useCart';
 export function CartSidebar() {
   const { items, isOpen, toggleCart, removeItem, updateQuantity, getTotal, clearCart } = useCartStore();
 
-  if (!isOpen) return null;
-
   return (
     <>
       <div
-        className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity"
+        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-all duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         onClick={toggleCart}
         aria-hidden="true"
       />
       
-      <aside className="fixed top-0 right-0 h-full w-full max-w-md z-50 flex flex-col"
+      <aside
+        className={`fixed top-0 right-0 h-full w-full max-w-md z-50 flex flex-col transition-all duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
         style={{
           background: 'linear-gradient(180deg, #0a0a0f 0%, #050508 100%)',
           borderLeft: '1px solid #00ff8820',

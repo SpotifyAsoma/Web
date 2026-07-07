@@ -50,6 +50,10 @@ export function Navigation() {
             About
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-cyber-neon transition-all group-hover:w-full" />
           </a>
+          <a href="/blog" className="text-gray-300 hover:text-cyber-neon transition-colors font-mono text-sm relative group">
+            Blog
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-cyber-neon transition-all group-hover:w-full" />
+          </a>
           <a href="/admin" className="text-cyber-neon2 hover:text-cyber-neon transition-colors font-mono text-sm px-3 py-1 rounded border border-cyber-neon2/30 hidden sm:block">
             Admin
           </a>

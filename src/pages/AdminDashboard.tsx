@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { products } from '../data/products';
+import { useContentStore } from '../hooks/useContent';
 
 const mockOrders = [
   { id: 'ORD-001', customer: 'john.doe@email.com', game: 'Fortnite V-Bucks', amount: 2800, price: 19.99, status: 'completed', date: '2025-07-06 14:32' },
@@ -117,6 +118,134 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
   );
 }
 
+function ContentEditor() {
+  const { texts, setText, resetText } = useContentStore();
+  const [search, setSearch] = useState('');
+
+  const fields: { key: string; label: string; section: string }[] = [
+    { key: 'hero-badge', label: 'Hero Badge Label', section: 'Hero' },
+    { key: 'hero-title', label: 'Hero Main Heading', section: 'Hero' },
+    { key: 'hero-description', label: 'Hero Description', section: 'Hero' },
+    { key: 'hero-cta-primary', label: 'Hero CTA Primary Button', section: 'Hero' },
+    { key: 'hero-cta-secondary', label: 'Hero CTA Secondary Button', section: 'Hero' },
+    { key: 'featured-badge', label: 'Featured Section Badge', section: 'Featured' },
+    { key: 'featured-heading', label: 'Featured Section Heading', section: 'Featured' },
+    { key: 'featured-subtext', label: 'Featured Section Subtext', section: 'Featured' },
+    { key: 'catalog-badge', label: 'Catalog Section Badge', section: 'Catalog' },
+    { key: 'catalog-heading', label: 'Catalog Section Heading', section: 'Catalog' },
+    { key: 'features-badge', label: 'Features Section Badge', section: 'Features' },
+    { key: 'features-heading', label: 'Features Section Heading', section: 'Features' },
+    { key: 'features-subtext', label: 'Features Section Subtext', section: 'Features' },
+    { key: 'cta-badge', label: 'CTA Section Badge', section: 'CTA' },
+    { key: 'cta-heading', label: 'CTA Section Heading', section: 'CTA' },
+    { key: 'cta-subtext', label: 'CTA Section Subtext', section: 'CTA' },
+    { key: 'cta-button', label: 'CTA Primary Button', section: 'CTA' },
+    { key: 'cta-button2', label: 'CTA Secondary Button', section: 'CTA' },
+    { key: 'footer-tagline', label: 'Footer Description', section: 'Footer' },
+    { key: 'footer-copyright', label: 'Footer Copyright Brand', section: 'Footer' },
+    { key: 'footer-tag', label: 'Footer Badge Label', section: 'Footer' },
+  ];
+
+  const filtered = fields.filter(
+    (f) => f.label.toLowerCase().includes(search.toLowerCase()) || f.section.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h2 className="font-sans font-bold text-3xl text-white">Content Editor</h2>
+          <p className="text-gray-400 font-mono text-sm mt-1">Edit all site text in one place — changes save instantly</p>
+        </div>
+        <input
+          type="text"
+          placeholder="Search content..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="bg-cyber-card border border-cyber-neon/20 rounded-lg px-4 py-2 text-white font-mono text-sm placeholder-gray-500 focus:border-cyber-neon focus:outline-none w-64"
+        />
+      </div>
+
+      <div className="card-glow overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-cyber-neon/10">
+                <th className="text-left py-4 px-6 font-mono text-xs text-gray-400 uppercase tracking-wider">Section</th>
+                <th className="text-left py-4 px-6 font-mono text-xs text-gray-400 uppercase tracking-wider">Field Name</th>
+                <th className="text-left py-4 px-6 font-mono text-xs text-gray-400 uppercase tracking-wider">Current Value</th>
+                <th className="text-left py-4 px-6 font-mono text-xs text-gray-400 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((field) => {
+                const key = field.key;
+                const isLong = texts[key].length > 60;
+                return (
+                  <tr key={key} className="border-b border-cyber-neon/5 hover:bg-cyber-card/50">
+                    <td className="py-4 px-6">
+                      <span className="px-2 py-1 rounded text-[10px] font-mono font-bold"
+                        style={{
+                          background: 'rgba(0, 255, 136, 0.1)',
+                          color: '#00ff88',
+                          border: '1px solid #00ff8840',
+                        }}
+                      >
+                        {field.section}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 font-mono text-sm text-white">{field.label}</td>
+                    <td className="py-4 px-6">
+                      {isLong ? (
+                        <textarea
+                          value={texts[key]}
+                          onChange={(e) => setText(key, e.target.value)}
+                          className="w-full bg-cyber-darker border border-cyber-neon/20 rounded-lg px-3 py-2 text-white font-mono text-sm resize-y focus:border-cyber-neon focus:outline-none"
+                          rows={3}
+                        />
+                      ) : (
+                        <input
+                          type="text"
+                          value={texts[key]}
+                          onChange={(e) => setText(key, e.target.value)}
+                          className="w-full bg-cyber-darker border border-cyber-neon/20 rounded-lg px-3 py-2 text-white font-mono text-sm focus:border-cyber-neon focus:outline-none"
+                        />
+                      )}
+                    </td>
+                    <td className="py-4 px-6">
+                      <button
+                        onClick={() => resetText(key)}
+                        className="px-3 py-1.5 rounded text-xs font-mono transition-colors"
+                        style={{
+                          background: 'rgba(255, 0, 110, 0.1)',
+                          color: '#ff006e',
+                          border: '1px solid #ff006e40',
+                        }}
+                      >
+                        Reset
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {filtered.length === 0 && (
+          <div className="p-12 text-center text-gray-500">
+            No content fields match your search.
+          </div>
+        )}
+        <div className="p-4 border-t border-cyber-neon/10">
+          <p className="font-mono text-xs text-gray-500">
+            Changes are saved automatically to your browser. {filtered.length} of {fields.length} fields shown.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function AdminDashboard() {
   const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem('admin_auth') === 'true');
   const [activeTab, setActiveTab] = useState('overview');
@@ -201,6 +330,7 @@ export function AdminDashboard() {
               { id: 'orders', label: 'Orders', icon: '📦' },
               { id: 'products', label: 'Products', icon: '🎮' },
               { id: 'analytics', label: 'Analytics', icon: '📈' },
+              { id: 'content', label: 'Content', icon: '📝' },
               { id: 'settings', label: 'Settings', icon: '⚙️' },
             ].map((tab) => (
               <button
@@ -635,6 +765,9 @@ export function AdminDashboard() {
               </div>
             </div>
           )}
+
+          {/* Content Editor Tab */}
+          {activeTab === 'content' && <ContentEditor />}
 
           {/* Settings Tab */}
           {activeTab === 'settings' && (

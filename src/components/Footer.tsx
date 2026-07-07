@@ -1,4 +1,7 @@
+import { useContentStore } from '../hooks/useContent';
+
 export function Footer() {
+  const t = useContentStore((s) => s.texts);
   const currentYear = new Date().getFullYear();
   
   return (
@@ -23,8 +26,7 @@ export function Footer() {
               </span>
             </a>
             <p className="text-gray-400 max-w-md leading-relaxed mb-6">
-              Your trusted source for instant digital game currency delivery. 
-              Serving millions of gamers worldwide with the best prices and 24/7 support.
+              {t['footer-tagline']}
             </p>
             <div className="flex items-center gap-4 mb-6">
               <a href="#" className="w-10 h-10 rounded-lg flex items-center justify-center text-gray-400 hover:text-cyber-neon transition-colors border border-cyber-neon/20 hover:border-cyber-neon/50" aria-label="Discord">
@@ -61,7 +63,7 @@ export function Footer() {
               </div>
               <div>
                 <p className="font-mono text-xs text-cyber-neon font-bold">Powered by AIDEN</p>
-                <p className="font-mono text-[10px] text-gray-500">Official Partner Store</p>
+                <p className="font-mono text-[10px] text-gray-500">{t['footer-tag']}</p>
               </div>
             </div>
           </div>
@@ -92,7 +94,7 @@ export function Footer() {
         <div className="pt-8 border-t border-cyber-neon/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-4 text-sm">
             <p className="text-gray-500 font-mono">
-              © {currentYear} GAMEVAULT. All rights reserved.
+              © {currentYear} {t['footer-copyright']}. All rights reserved.
             </p>
             <p className="font-mono text-xs text-cyber-neon/70">
               Built with ❤️ by <span className="font-bold text-cyber-neon">AIDEN</span>
