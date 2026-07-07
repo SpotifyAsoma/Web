@@ -194,7 +194,7 @@ function CoinsScene() {
 
 export function HeroCanvas() {
   return (
-    <div className="relative w-full h-full min-h-screen" style={{ touchAction: 'none' }}>
+    <div className="relative w-full min-h-full h-full" style={{ touchAction: 'none' }}>
       <Canvas
         camera={{ position: [0, 3, 12], fov: 45 }}
         shadows
