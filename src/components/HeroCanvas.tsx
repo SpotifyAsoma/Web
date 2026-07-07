@@ -14,7 +14,7 @@ interface CoinProps {
 function Coin({ product, index, total, mouse }: CoinProps) {
   const groupRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
-  const radius = 9;
+  const radius = 7;
   const angle = (index / total) * Math.PI * 2;
   const baseX = Math.sin(angle) * radius;
   const baseZ = Math.cos(angle) * radius;
