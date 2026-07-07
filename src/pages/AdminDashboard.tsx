@@ -17,8 +17,116 @@ const mockStats = {
   conversionRate: 3.24,
 };
 
+function AdminLogin({ onLogin }: { onLogin: () => void }) {
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setTimeout(() => {
+      if (password === (import.meta.env.VITE_ADMIN_PASSWORD || 'admin123')) {
+        onLogin();
+      } else {
+        setError('Invalid password');
+        setLoading(false);
+      }
+    }, 400);
+  };
+
+  return (
+    <div className="min-h-screen bg-cyber-darker bg-grid flex items-center justify-center p-6">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md card-glow p-8 relative overflow-hidden"
+        style={{ borderColor: '#00ff8840' }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-cyber-neon/5 via-transparent to-cyber-neon2/5" />
+        <div className="relative z-10">
+          <div className="text-center mb-8">
+            <div
+              className="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center text-2xl mb-4"
+              style={{
+                background: 'linear-gradient(135deg, #ff006e, #ffd700)',
+                boxShadow: '0 0 30px #ff006e60',
+              }}
+            >
+              ⚙️
+            </div>
+            <h1 className="font-sans font-bold text-2xl text-white">Admin Access</h1>
+            <p className="font-mono text-xs text-cyber-neon/70 mt-1">AIDEN GAME VAULT</p>
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block font-mono text-xs text-gray-400 mb-2">Admin Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter password..."
+                autoFocus
+                className="w-full bg-cyber-darker border border-cyber-neon/20 rounded-lg px-4 py-3 text-white font-mono text-sm placeholder-gray-500 focus:border-cyber-neon focus:outline-none transition-colors"
+              />
+            </div>
+
+            {error && (
+              <p className="font-mono text-xs text-cyber-neon2 flex items-center gap-2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="15" y1="9" x2="9" y2="15" />
+                  <line x1="9" y1="9" x2="15" y2="15" />
+                </svg>
+                {error}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 rounded-lg font-sans font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2"
+              style={{
+                background: loading ? '#333' : 'linear-gradient(135deg, #ff006e, #ffd700)',
+                color: '#0a0a0f',
+                boxShadow: loading ? 'none' : '0 0 20px #ff006e60',
+              }}
+            >
+              {loading ? (
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                  Unlock Dashboard
+                </>
+              )}
+            </button>
+          </div>
+
+          <div className="mt-6 text-center">
+            <a href="/" className="font-mono text-xs text-gray-500 hover:text-cyber-neon transition-colors">
+              ← Back to store
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 export function AdminDashboard() {
+  const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem('admin_auth') === 'true');
   const [activeTab, setActiveTab] = useState('overview');
+
+  const handleLogin = () => {
+    sessionStorage.setItem('admin_auth', 'true');
+    setAuthenticated(true);
+  };
+
+  if (!authenticated) return <AdminLogin onLogin={handleLogin} />;
   const [orders] = useState(mockOrders);
   const [stats] = useState(mockStats);
   const [searchTerm, setSearchTerm] = useState('');

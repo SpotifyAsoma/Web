@@ -1,11 +1,14 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
 import { ProductCard } from './components/ProductCard';
 import { CartSidebar } from './components/CartSidebar';
 import { Footer } from './components/Footer';
+import { LoadingScreen } from './components/LoadingScreen';
+import { AnimateOnScroll } from './components/AnimateOnScroll';
 import { featuredProducts, products } from './data/products';
 import { useCartStore } from './hooks/useCart';
 import { AdminDashboard } from './pages/AdminDashboard';
@@ -240,21 +243,33 @@ function CTASection() {
 }
 
 function StoreApp() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setReady(true), 3200);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-cyber-darker bg-grid">
-      <Navigation />
-      
-      <main>
-        <Hero />
-        <FeaturedSection />
-        <AllGamesSection />
-        <FeaturesSection />
-        <CTASection />
-      </main>
-      
-      <Footer />
-      <CartSidebar />
-    </div>
+    <>
+      <LoadingScreen />
+      {ready && (
+        <div className="min-h-screen bg-cyber-darker bg-grid animate-fadeIn">
+          <Navigation />
+
+          <main>
+            <AnimateOnScroll><Hero /></AnimateOnScroll>
+            <AnimateOnScroll><FeaturedSection /></AnimateOnScroll>
+            <AnimateOnScroll><AllGamesSection /></AnimateOnScroll>
+            <AnimateOnScroll><FeaturesSection /></AnimateOnScroll>
+            <AnimateOnScroll><CTASection /></AnimateOnScroll>
+          </main>
+
+          <Footer />
+          <CartSidebar />
+        </div>
+      )}
+    </>
   );
 }
 
