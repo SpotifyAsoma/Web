@@ -4,12 +4,12 @@ import { useContentStore } from '../hooks/useContent';
 export function Hero() {
   const t = useContentStore((s) => s.texts);
   return (
-    <section className="relative sm:h-[700px] overflow-hidden" id="hero">
+    <section className="relative lg:h-[700px] overflow-hidden" id="hero">
       <div className="absolute inset-0 bg-grid" />
       <div className="absolute inset-0 bg-gradient-to-br from-cyber-neon/5 via-transparent to-cyber-neon2/5" />
       <div className="absolute inset-0 bg-gradient-to-t from-cyber-darker via-transparent to-transparent" />
       
-      <div className="relative z-20 px-6 pt-24 pb-16 sm:absolute sm:inset-0 sm:flex sm:items-center sm:justify-center sm:pt-0 sm:pb-0">
+      <div className="relative z-20 px-6 pt-20 pb-16 lg:absolute lg:inset-0 lg:flex lg:items-center lg:justify-center lg:pt-0 lg:pb-0">
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
@@ -97,11 +97,11 @@ export function Hero() {
         </div>
       </div>
       
-      <div className="relative h-[350px] sm:absolute sm:inset-0 sm:h-auto">
+      <div className="relative h-[350px] lg:absolute lg:inset-0 lg:h-auto">
         <HeroCanvas />
       </div>
       
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce hidden lg:block">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00ff88" strokeWidth="1.5" className="opacity-60">
           <polyline points="6 9 12 15 18 9" />
         </svg>
