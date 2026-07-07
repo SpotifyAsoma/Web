@@ -196,7 +196,7 @@ export function HeroCanvas() {
   return (
     <div className="relative w-full min-h-full h-full" style={{ touchAction: 'none' }}>
       <Canvas
-        camera={{ position: [0, 3, 15], fov: 60 }}
+        camera={{ position: [0, 7, 15], fov: 60 }}
         shadows
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         onCreated={({ gl }) => {
