@@ -9,7 +9,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-br from-cyber-neon/5 via-transparent to-cyber-neon2/5" />
       <div className="absolute inset-0 bg-gradient-to-t from-cyber-darker via-transparent to-transparent" />
       
-      <div className="relative z-20 px-6 pt-24 pb-16 sm:absolute sm:inset-0 sm:flex sm:items-center sm:justify-center sm:p-0">
+      <div className="relative z-20 px-6 pt-24 pb-16 sm:absolute sm:inset-0 sm:flex sm:items-center sm:justify-center sm:pt-0 sm:pb-0">
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
