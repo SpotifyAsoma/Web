@@ -157,8 +157,8 @@ export function LoadingScreen() {
               key={i}
               className="w-3 h-3 rounded-full"
               style={{
-                background: 'linear-gradient(135deg, #00ff88, #00d4ff)',
-                boxShadow: '0 0 10px #00ff88',
+                background: 'linear-gradient(135deg, #dc2626, #60a5fa)',
+                boxShadow: '0 0 5px rgba(96, 165, 250, 0.45)',
                 animation: `loading-bounce 1.2s ease-in-out ${i * 0.2}s infinite`,
               }}
             />
