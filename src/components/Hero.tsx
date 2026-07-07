@@ -2,7 +2,7 @@ import { HeroCanvas } from './HeroCanvas';
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex justify-center overflow-hidden" id="hero">
+    <section className="relative h-[700px] flex justify-center overflow-hidden" id="hero">
       <div className="absolute inset-0 bg-grid" />
       <div className="absolute inset-0 bg-gradient-to-br from-cyber-neon/5 via-transparent to-cyber-neon2/5" />
       <div className="absolute inset-0 bg-gradient-to-t from-cyber-darker via-transparent to-transparent" />
